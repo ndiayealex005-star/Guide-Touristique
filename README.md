@@ -1,3 +1,4 @@
+
 # Répertoire des guides touristiques du Sénégal
 
 Application pédagogique Angular permettant de consulter, rechercher, filtrer, ajouter, modifier et supprimer des fiches de guides touristiques. Elle utilise des composants standalone, le routage Angular, les formulaires réactifs et les blocs de contrôle modernes (`@if`, `@for`, `@empty`).
@@ -114,3 +115,5 @@ Cet extrait illustre les routes REST usuelles (`GET`, `POST`, `PUT`, `DELETE`) ;
 ## Tests
 
 Le projet utilise le runner configuré par Angular CLI/Vitest. Ajoutez des tests unitaires au service pour les opérations CRUD et des tests de composants pour les filtres et validations lors de l’évolution du projet.
+# Guide-Touristique
+Application Angular de gestion d'un répertoire de guides touristiques fictifs au Sénégal.
