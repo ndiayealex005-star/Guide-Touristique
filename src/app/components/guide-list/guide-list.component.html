@@ -1,0 +1,93 @@
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">Découvrir le Sénégal autrement</p>
+    <h2>Les guides touristiques</h2>
+    <p class="intro">Recherchez un guide et trouvez la personne qui vous accompagnera.</p>
+  </div>
+  <a class="button button-primary" routerLink="/guides/nouveau">Ajouter un guide</a>
+</section>
+
+@if (notification(); as message) {
+  <p class="notice" role="status">{{ message }}</p>
+}
+
+<section class="filters" aria-label="Recherche et filtres des guides">
+  <div class="field search-field">
+    <label for="recherche-guide">Rechercher</label>
+    <input
+      id="recherche-guide"
+      type="search"
+      [(ngModel)]="recherche"
+      placeholder="Nom, prénom ou spécialité"
+      aria-label="Rechercher par nom, prénom ou spécialité"
+    />
+  </div>
+  <div class="field">
+    <label for="filtre-region">Région</label>
+    <select id="filtre-region" [(ngModel)]="regionSelectionnee" aria-label="Filtrer par région">
+      <option value="">Toutes les régions</option>
+      @for (region of regions(); track region) {
+        <option [value]="region">{{ region }}</option>
+      }
+    </select>
+  </div>
+  <div class="field">
+    <label for="filtre-statut">Statut</label>
+    <select id="filtre-statut" [(ngModel)]="statutSelectionne" aria-label="Filtrer par statut">
+      <option value="">Tous les statuts</option>
+      <option value="actif">Actif</option>
+      <option value="inactif">Inactif</option>
+    </select>
+  </div>
+  <button class="button button-secondary reset-button" type="button" (click)="reinitialiserFiltres()">
+    Réinitialiser
+  </button>
+</section>
+
+<p class="results-count" aria-live="polite">
+  {{ guidesFiltres.length }} guide{{ guidesFiltres.length > 1 ? 's' : '' }}
+</p>
+
+<section class="guide-grid" aria-label="Résultats des guides">
+  @for (guide of guidesFiltres; track guide.id) {
+    <article class="guide-card">
+      <div class="card-topline">
+        <span class="region">{{ guide.region }}</span>
+        <span class="status-badge" [class.status-active]="guide.actif" [class.status-inactive]="!guide.actif">
+          {{ guide.actif ? 'Actif' : 'Inactif' }}
+        </span>
+      </div>
+      <h3>{{ guide.prenom }} {{ guide.nom }}</h3>
+      <p class="specialty">{{ guide.specialites }}</p>
+      <p><strong>Langues :</strong> {{ guide.langues.join(', ') }}</p>
+      <p><strong>Note :</strong> {{ guide.note | number: '1.1-1' }} / 5</p>
+      <p><strong>E-mail :</strong> <a [href]="'mailto:' + guide.email">{{ guide.email }}</a></p>
+      <p><strong>Téléphone :</strong> {{ guide.telephone }}</p>
+      <div class="card-actions">
+        <a
+          class="button button-secondary"
+          [routerLink]="['/guides', guide.id, 'modifier']"
+          [attr.aria-label]="'Modifier la fiche de ' + guide.prenom + ' ' + guide.nom"
+        >
+          Modifier
+        </a>
+        <button
+          class="button button-danger"
+          type="button"
+          (click)="supprimer(guide.id, guide.prenom + ' ' + guide.nom)"
+          [attr.aria-label]="'Supprimer la fiche de ' + guide.prenom + ' ' + guide.nom"
+        >
+          Supprimer
+        </button>
+      </div>
+    </article>
+  } @empty {
+    <div class="empty-state">
+      <h3>Aucun guide trouvé</h3>
+      <p>Modifiez votre recherche ou vos filtres pour afficher des résultats.</p>
+      <button class="button button-secondary" type="button" (click)="reinitialiserFiltres()">
+        Effacer les filtres
+      </button>
+    </div>
+  }
+</section>

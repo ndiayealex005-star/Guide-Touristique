@@ -1,0 +1,122 @@
+<section class="form-page">
+  <a class="back-link" routerLink="/">← Retour à la liste</a>
+  <h2>{{ estEdition() ? 'Modifier un guide' : 'Ajouter un guide' }}</h2>
+  <p class="form-intro">Les champs marqués d’un astérisque sont obligatoires.</p>
+
+  @if (erreurChargement(); as erreur) {
+    <p class="error-banner" role="alert">{{ erreur }}</p>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="enregistrer()" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="prenom">Prénom *</label>
+          <input id="prenom" formControlName="prenom" autocomplete="given-name" />
+          @if (form.controls.prenom.touched && form.controls.prenom.hasError('required')) {
+            <small class="field-error">Le prénom est obligatoire.</small>
+          } @else if (form.controls.prenom.touched && form.controls.prenom.hasError('minlength')) {
+            <small class="field-error">Le prénom doit contenir au moins 2 caractères.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="nom">Nom *</label>
+          <input id="nom" formControlName="nom" autocomplete="family-name" />
+          @if (form.controls.nom.touched && form.controls.nom.hasError('required')) {
+            <small class="field-error">Le nom est obligatoire.</small>
+          } @else if (form.controls.nom.touched && form.controls.nom.hasError('minlength')) {
+            <small class="field-error">Le nom doit contenir au moins 2 caractères.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="region">Région *</label>
+          <select id="region" formControlName="region">
+            <option value="" disabled>Choisir une région</option>
+            @for (region of regions; track region) {
+              <option [value]="region">{{ region }}</option>
+            }
+          </select>
+          @if (form.controls.region.touched && form.controls.region.hasError('required')) {
+            <small class="field-error">Veuillez sélectionner une région.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="langues">Langues *</label>
+          <input id="langues" formControlName="langues" placeholder="Français, Wolof, Anglais" />
+          <small class="hint">Séparez les langues par des virgules.</small>
+          @if (form.controls.langues.touched && form.controls.langues.hasError('required')) {
+            <small class="field-error">Indiquez au moins une langue.</small>
+          } @else if (form.controls.langues.touched && form.controls.langues.hasError('minlength')) {
+            <small class="field-error">La saisie doit contenir au moins 2 caractères.</small>
+          } @else if (form.controls.langues.touched && form.controls.langues.hasError('langueRequired')) {
+            <small class="field-error">Indiquez au moins une langue, séparée par une virgule.</small>
+          }
+        </div>
+
+        <div class="field full-width">
+          <label for="specialites">Spécialités *</label>
+          <textarea id="specialites" formControlName="specialites" rows="3"></textarea>
+          @if (form.controls.specialites.touched && form.controls.specialites.hasError('required')) {
+            <small class="field-error">La spécialité est obligatoire.</small>
+          } @else if (form.controls.specialites.touched && form.controls.specialites.hasError('minlength')) {
+            <small class="field-error">La spécialité doit contenir au moins 5 caractères.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail *</label>
+          <input id="email" type="email" formControlName="email" autocomplete="email" />
+          @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+            <small class="field-error">L’adresse e-mail est obligatoire.</small>
+          } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
+            <small class="field-error">Saisissez une adresse e-mail valide.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="telephone">Téléphone sénégalais *</label>
+          <input
+            id="telephone"
+            type="tel"
+            formControlName="telephone"
+            autocomplete="tel"
+            placeholder="+221 77 123 45 67"
+            aria-describedby="telephone-aide"
+          />
+          <small id="telephone-aide" class="hint">Format mobile (70, 75, 76, 77, 78) ou fixe (33).</small>
+          @if (form.controls.telephone.touched && form.controls.telephone.hasError('required')) {
+            <small class="field-error">Le numéro de téléphone est obligatoire.</small>
+          } @else if (form.controls.telephone.touched && form.controls.telephone.hasError('pattern')) {
+            <small class="field-error">Saisissez un numéro sénégalais valide, par exemple +221 77 123 45 67.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="note">Note sur 5 *</label>
+          <input id="note" type="number" min="0" max="5" step="0.1" formControlName="note" />
+          @if (form.controls.note.touched && form.controls.note.hasError('required')) {
+            <small class="field-error">La note est obligatoire.</small>
+          } @else if (form.controls.note.touched && (form.controls.note.hasError('min') || form.controls.note.hasError('max'))) {
+            <small class="field-error">La note doit être comprise entre 0 et 5.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="actif">Statut *</label>
+          <select id="actif" formControlName="actif">
+            <option [ngValue]="true">Actif</option>
+            <option [ngValue]="false">Inactif</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a class="button button-secondary" routerLink="/">Annuler</a>
+        <button class="button button-primary" type="submit">
+          {{ estEdition() ? 'Enregistrer les modifications' : 'Ajouter le guide' }}
+        </button>
+      </div>
+    </form>
+  }
+</section>
