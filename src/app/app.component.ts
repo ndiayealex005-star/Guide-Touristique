@@ -7,18 +7,28 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   imports: [RouterLink, RouterOutlet],
   template: `
     <header class="site-header">
-      <a class="brand" routerLink="/" aria-label="Accueil, répertoire des guides du Sénégal">
-        <span class="brand-mark" aria-hidden="true">S</span>
-        <span>Guides du Sénégal</span>
-      </a>
-      <p>Répertoire touristique</p>
-    </header>
-    <main class="main-content">
-      <router-outlet />
-    </main>
-    <footer class="site-footer">
-      <p>Projet pédagogique — données de démonstration fictives</p>
-    </footer>
+  <h1>Bienvenue sur notre plateforme touristique</h1>
+  <p>Explorez les merveilles du Sénégal !</p>
+</header>
+
+<main class="main-content">
+  <section>
+    <h2>Découvrez le Sénégal</h2>
+    <p>
+      Retrouvez les meilleurs guides touristiques
+      et préparez vos prochaines visites.
+    </p>
+
+    <button routerLink="/">Voir les guides</button>
+  </section>
+
+  <router-outlet />
+</main>
+
+<footer class="site-footer">
+  <p>Application réalisée par notre équipe Angular.</p>
+  <p>Version de test pour apprendre Git et les fusions.</p>
+</footer>
   `,
   styles: `
     :host { display: flex; min-height: 100vh; flex-direction: column; }
