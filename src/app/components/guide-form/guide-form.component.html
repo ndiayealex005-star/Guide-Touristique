@@ -1,5 +1,5 @@
 <section class="form-page">
-  <a class="back-link" routerLink="/">← Retour à la liste</a>
+  <a class="back-link" routerLink="/guides">← Retour à la liste</a>
   <h2>{{ estEdition() ? 'Modifier un guide' : 'Ajouter un guide' }}</h2>
   <p class="form-intro">Les champs marqués d’un astérisque sont obligatoires.</p>
 
@@ -112,7 +112,7 @@
       </div>
 
       <div class="form-actions">
-        <a class="button button-secondary" routerLink="/">Annuler</a>
+        <a class="button button-secondary" routerLink="/guides">Annuler</a>
         <button class="button button-primary" type="submit">
           {{ estEdition() ? 'Enregistrer les modifications' : 'Ajouter le guide' }}
         </button>
