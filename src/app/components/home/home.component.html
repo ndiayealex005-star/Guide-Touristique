@@ -1,0 +1,171 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-backdrop" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="hero-kicker"><span></span> Teranga, Sénégal</p>
+    <h1 id="hero-title">Le Sénégal vous attend.<br /><em>Découvrez ses merveilles.</em></h1>
+    <p class="hero-description">
+      Des plages infinies aux paysages du fleuve, vivez une aventure authentique
+      aux couleurs du pays de la Teranga.
+    </p>
+    <div class="hero-actions">
+      <a class="button button-light" routerLink="/" fragment="destinations">
+        Explorer le Sénégal
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" /></svg>
+      </a>
+      <a class="button button-ghost" routerLink="/guides">Découvrir les guides</a>
+    </div>
+  </div>
+  <a class="hero-scroll" routerLink="/" fragment="destinations" aria-label="Faire défiler vers les destinations">
+    <span>Découvrir</span>
+    <span class="scroll-line"></span>
+  </a>
+  <div class="hero-location" aria-label="Destination mise en avant">
+    <span>14°40' N</span>
+    <strong>Gorée · Dakar</strong>
+  </div>
+</section>
+
+<section class="intro-strip" aria-label="Repères du Sénégal">
+  <div>
+    <strong>14</strong>
+    <span>régions à explorer</span>
+  </div>
+  <div>
+    <strong>700 km</strong>
+    <span>de littoral</span>
+  </div>
+  <div>
+    <strong>Teranga</strong>
+    <span>une hospitalité légendaire</span>
+  </div>
+</section>
+
+<section class="destinations section-shell" id="destinations" aria-labelledby="destinations-title">
+  <header class="section-heading reveal">
+    <div>
+      <p class="eyebrow">Votre prochaine escale</p>
+      <h2 id="destinations-title">Destinations incontournables</h2>
+    </div>
+    <p>
+      Une invitation à traverser des territoires contrastés, où chaque horizon
+      raconte une histoire nouvelle.
+    </p>
+  </header>
+
+  <div class="destination-grid">
+    @for (destination of destinations; track destination.nom; let i = $index) {
+      <article class="destination-card reveal" [class.destination-featured]="i === 0">
+        <img [src]="destination.image" [alt]="destination.nom + ', destination touristique du Sénégal'" />
+        <div class="destination-overlay"></div>
+        <div class="destination-copy">
+          <p>{{ destination.type }}</p>
+          <h3>{{ destination.nom }}</h3>
+          <span>{{ destination.description }}</span>
+        </div>
+        <a routerLink="/guides" [attr.aria-label]="'Découvrir les guides à ' + destination.nom">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" /></svg>
+        </a>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="why-section" aria-labelledby="why-title">
+  <div class="section-shell why-layout">
+    <header class="section-heading reveal">
+      <div>
+        <p class="eyebrow">L'esprit du Sénégal</p>
+        <h2 id="why-title">Pourquoi venir découvrir le Sénégal&nbsp;?</h2>
+      </div>
+    </header>
+
+    <div class="why-grid">
+      <article class="why-card reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M4 23c5-4 9-4 12 0 3 4 7 4 12 0M4 17c5-4 9-4 12 0 3 4 7 4 12 0M16 5v18M9 9l7-4 7 4" /></svg>
+        </div>
+        <span>01</span>
+        <h3>Des paysages contrastés</h3>
+        <p>Océan Atlantique, fleuve, savane, lagunes et mangroves composent un voyage plein de surprises.</p>
+      </article>
+      <article class="why-card reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="6"/><path d="M7 27c1-7 4-10 9-10s8 3 9 10M11 27h10" /></svg>
+        </div>
+        <span>02</span>
+        <h3>Une culture vivante</h3>
+        <p>Musiques, savoir-faire, gastronomie et fêtes donnent au Sénégal une identité unique et accueillante.</p>
+      </article>
+      <article class="why-card reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M16 3v26M5 16h22M8 8l16 16M24 8 8 24"/><circle cx="16" cy="16" r="10"/></svg>
+        </div>
+        <span>03</span>
+        <h3>Une terre de rencontres</h3>
+        <p>La teranga, cette hospitalité sénégalaise, transforme chaque rencontre en souvenir précieux.</p>
+      </article>
+      <article class="why-card reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M5 25c5-8 9-12 11-18 2 6 6 10 11 18M16 7v18M9 20h14" /></svg>
+        </div>
+        <span>04</span>
+        <h3>La nature à portée</h3>
+        <p>Réserves ornithologiques, parcs et îles permettent de vivre des expériences naturelles intenses.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="guides-section section-shell" aria-labelledby="guides-title">
+  <header class="section-heading reveal">
+    <div>
+      <p class="eyebrow">Des rencontres authentiques</p>
+      <h2 id="guides-title">Nos guides touristiques</h2>
+    </div>
+    <a class="text-link" routerLink="/guides">Voir tous les guides <span>→</span></a>
+  </header>
+
+  <div class="guide-grid">
+    @for (guide of guidesVedettes; track guide.id) {
+      <article class="guide-card reveal">
+        <div class="guide-avatar" aria-hidden="true">{{ guide.prenom.charAt(0) }}{{ guide.nom.charAt(0) }}</div>
+        <div class="guide-status"><span></span> Disponible</div>
+        <h3>{{ guide.prenom }} {{ guide.nom }}</h3>
+        <p class="guide-region">{{ guide.region }}</p>
+        <p class="guide-specialty">{{ guide.specialites }}</p>
+        <div class="guide-meta">
+          <span><strong>{{ guide.note | number:'1.1-1' }}</strong> / 5</span>
+          <span>{{ guide.langues.length }} langues</span>
+        </div>
+        <a routerLink="/guides" [attr.aria-label]="'Voir la fiche de ' + guide.prenom + ' dans le répertoire'">
+          Voir dans le répertoire
+        </a>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="experience reveal" aria-labelledby="experience-title">
+  <img src="/images/casamance.webp" alt="Mangrove et paysage naturel de Casamance" />
+  <div class="experience-overlay"></div>
+  <div class="experience-content">
+    <p class="eyebrow">Voyagez autrement</p>
+    <h2 id="experience-title">Chaque rencontre devient une histoire</h2>
+    <p>
+      Derrière chaque destination se trouve une communauté, une mémoire et une
+      manière unique de faire vivre le Sénégal.
+    </p>
+    <a class="button button-light" routerLink="/guides">Rencontrer nos guides</a>
+  </div>
+</section>
+
+<section class="cta-section section-shell reveal" aria-labelledby="cta-title">
+  <div>
+    <p class="eyebrow">Prêt pour l'aventure ?</p>
+    <h2 id="cta-title">Votre voyage commence ici</h2>
+  </div>
+  <div class="cta-actions">
+    <a class="button button-dark" routerLink="/" fragment="destinations">Explorer les destinations</a>
+    <a class="button button-outline" routerLink="/guides">Voir les guides</a>
+  </div>
+</section>

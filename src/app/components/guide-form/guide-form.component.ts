@@ -110,6 +110,6 @@ export class GuideFormComponent implements OnInit {
       return;
     }
 
-    void this.router.navigateByUrl('/');
+    void this.router.navigateByUrl('/guides');
   }
 }

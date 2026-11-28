@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
       <p class="code">404</p>
       <h2>Page introuvable</h2>
       <p>La page demandée n’existe pas ou n’est plus disponible.</p>
-      <a routerLink="/">Retourner à la liste des guides</a>
+      <a routerLink="/guides">Retourner à la liste des guides</a>
     </section>
   `,
   styles: `
